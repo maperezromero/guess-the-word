@@ -1,0 +1,11 @@
+
+.Header{
+    height: 6vh;
+    font-size: 2rem;
+    border-bottom: 1px solid;
+    width: 100vw;
+    margin-bottom: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

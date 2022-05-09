@@ -1,0 +1,20 @@
+.panel{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-background);
+    gap: 5px;
+  }
+  
+  .row{
+    display: flex;
+    align-content: space-between;
+    gap: 5px;
+  }
+  .cell{
+    border: solid grey 2px;
+    aspect-ratio: 1;
+    height: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
