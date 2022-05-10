@@ -19,7 +19,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    /* transition-duration: 1s;
+    transition-property: outline; */
 }
-#20,#28{
+.key:hover{
+    opacity: 0.6;
+}
+.key:active{
+    outline: 2px solid blue;
+}
+#k20,#k28{
     width: 100%;
+    
 }

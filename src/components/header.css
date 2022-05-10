@@ -9,3 +9,10 @@
     justify-content: center;
     align-items: center;
 }
+
+.image{
+    width: 1em;
+    position: absolute;
+    right: 5vw;
+    cursor: pointer;
+}
