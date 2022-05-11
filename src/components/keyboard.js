@@ -14,12 +14,22 @@ function Keyboard(){
         let letter= e.target.innerHTML;
         console.log(e);
         if (values.status!=='OVER'){
-            let copyKeys = [...values.keys]
+            let copyKeys = [...values.keys];
+            let currentWord = [...values.currentWord]
+
             //console.log(copyKeys);
             if( letter !== 'ENTER' && letter !== 'DEL'){
-                loop1:
+                console.log(values.letterIndex);
+                if(values.letterIndex < 5){
+                    copyKeys[values.rowIndex][values.letterIndex] = letter;
+                    console.log(copyKeys);
+                    //const index = values.letterIndex ===4 ? 4
+                    setValues({...values, keys: copyKeys, letterIndex: values.letterIndex + 1})
+                }else{
+                    console.log('You have already entered the five characters, click enter or delete one of them');
+                }
+                /* loop1:
                 for(let i=0; i<copyKeys.length;i++){
-                    loop2:
                     //console.log('entra en loop1');
                     for(let j=0; j<copyKeys[i].length;j++){
                         //console.log('En loop 2');
@@ -31,13 +41,29 @@ function Keyboard(){
                             break loop1;
                         }
                     }
-                }
+                } */
             }else if(letter === 'DEL'){
+                copyKeys[values.rowIndex][values.letterIndex-1] = '';
+                setValues({...values, keys: copyKeys, letterIndex: values.letterIndex - 1})
 
             }else{
-                
+                //ENTER
+                if(values.letterIndex === 5){
+                    const enteredWord = values.keys[values.rowIndex];
+                    for (let i = 0; i < enteredWord.length; i++) {
+                        if(enteredWord[i]===values.wordToGuess[i]){
+                            console.log('COINCIDE');
+                        }
+                        
+                    }
+                    // copyKeys[values.rowIndex][values.letterIndex] = letter;
+                    // console.log(copyKeys);
+                    // setValues({...values, keys: copyKeys, letterIndex: values.letterIndex + 1})
+                }else{
+                    console.log(values.letterIndex);
+                    console.log('You not have completed the word!');
+                }
             }
-            //console.log(copyKeys);
         }
     }
         return(

@@ -10,7 +10,11 @@ function App() {
 
   const [values, setValues] = useState(
     {
+      wordToGuess: 'RODEA',
+      currentWord: [],
       darkMode: true,
+      rowIndex: 0,
+      letterIndex:0,
       keys:[
           ['','','','',''],
           ['','','','',''],
@@ -19,7 +23,6 @@ function App() {
           ['','','','',''],
           ['','','','','']
         ],
-      currentWord: [],
       status: 'playing'
     }
   );
