@@ -18,3 +18,10 @@
     align-items: center;
     justify-content: center;
   }
+
+  .cell.green{
+    background-color: green;
+  }
+  .cell.wrong{
+    background-color:#3a3a3c ; 
+  }

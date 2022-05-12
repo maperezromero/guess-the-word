@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import './App.css';
 import Header from './components/header';
 import Keyboard from './components/keyboard';
@@ -26,15 +26,21 @@ function App() {
       status: 'playing'
     }
   );
-
+  
+  //document.body.classList.add('dark');
+  
+  useEffect(() => {
+  
+  });
 
   return (
     <valuesContext.Provider value ={{values, setValues}}>
       <div className="App">
-        <Header/>
+      <Header/>
         <PanelGame/>
         <Keyboard/>
       </div>
+      
     </valuesContext.Provider>
   );
 }

@@ -15,3 +15,23 @@
   justify-content: center;
   align-items: center;
 }
+
+body.light {
+  --color-bg: #FFFFFF;
+  --color-text: #000000;
+}
+
+body.dark {
+  --color-bg: #000000;;
+  --color-text: #ffffff;
+
+}
+body {
+  --color-bg: #000000;;
+  --color-text: #ffffff;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}

@@ -12,7 +12,8 @@
     justify-content: center;
 }
 .key{
-    background-color: grey;
+    background-color: var(--color-bg);
+    color: var(--color-text);
     border-radius: 3px;
     height: 6vh;
     aspect-ratio: 0.8;
@@ -29,7 +30,21 @@
 .key:active{
     outline: 2px solid blue;
 }
-#k20,#k28{
+
+#kENTER,#kDEL{
     width: 100%;
-    
+}
+
+.key.green {
+    --color-bg: green;
+
+}
+.key.normal{
+    --color-bg: gray;
+
+}
+
+.key.wrong{
+    --color-bg:#3a3a3c;
+
 }
