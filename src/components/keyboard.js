@@ -1,3 +1,4 @@
+import { logDOM } from "@testing-library/react";
 import { useContext } from "react";
 import { valuesContext } from "../App";
 
@@ -11,19 +12,21 @@ function Keyboard(){
     //console.log(keys.map(key=>key));
 
     function handleClick(e){
+        
+        const delay = async ( ms = 1000 ) => new Promise (res => setTimeout(res,ms));
         let letter= e.target.innerHTML;
-        //console.log(e);
-        if (values.status!=='OVER'){
+        
+        if (values.status!=='over' && values.status!=='win'){
+            //console.log(values.status);
             let copyKeys = [...values.keys];
             let currentWord = [...values.currentWord]
 
             //console.log(copyKeys);
             if( letter !== 'ENTER' && letter !== 'DEL'){
-                console.log(values.letterIndex);
+                //console.log(values.letterIndex);
                 if(values.letterIndex < 5){
                     copyKeys[values.rowIndex][values.letterIndex] = letter;
-                    console.log(copyKeys);
-                    //const index = values.letterIndex ===4 ? 4
+                    //console.log(copyKeys);
                     setValues({...values, keys: copyKeys, letterIndex: values.letterIndex + 1})
                 }else{
                     console.log('You have already entered the five characters, click enter or delete one of them');
@@ -33,35 +36,53 @@ function Keyboard(){
                     copyKeys[values.rowIndex][values.letterIndex-1] = '';
                     setValues({...values, keys: copyKeys, letterIndex: values.letterIndex - 1})
                 }
-                /* let element = document.getElementById(`cell${values.rowIndex}${values.letterIndex-1}`);
-                element.classList.remove("cell-green"); */
 
             }else{
                 //ENTER
                 if(values.letterIndex === 5){
                     const enteredWord = values.keys[values.rowIndex];
-                    for (let i = 0; i < enteredWord.length; i++) {
-                        if(enteredWord[i]===values.wordToGuess[i]){
-                            let element = document.getElementById(`cell${values.rowIndex}${i}`);
-                            element.classList.add("green");
-                            element = document.getElementById(`k${enteredWord[i]}`);
-                            element.removeAttribute('class');
-                            element.className = 'key green';
-                        }else{
-                            if(!values.wordToGuess.split("").some(letter => letter===enteredWord[i])){
+                    async function changeFormat(){
+                        for (let i = 0; i < enteredWord.length; i++) {
+                            //console.log('Ejecutosetimeout');
+                            if(enteredWord[i]===values.wordToGuess[i]){
                                 let element = document.getElementById(`cell${values.rowIndex}${i}`);
-                                element.classList.add("wrong");
+                                element.classList.add("green");
+                                element.classList.add("anime");
                                 element = document.getElementById(`k${enteredWord[i]}`);
                                 element.removeAttribute('class');
-                                element.className = 'key wrong';
+                                element.className = 'key green';
+                            }else{
+                                if(!values.wordToGuess.split("").some(letter => letter===enteredWord[i])){
+                                    let element = document.getElementById(`cell${values.rowIndex}${i}`);
+                                    element.classList.add("wrong");
+                                    element.classList.add("anime");
+                                    element = document.getElementById(`k${enteredWord[i]}`);
+                                    element.removeAttribute('class');
+                                    element.className = 'key wrong';
+                                }
                             }
+                            await delay(150);
                         }
+
+                    }
+                    changeFormat();
+                    //console.log(enteredWord.join(''), values.wordToGuess);
+                    if( enteredWord.join('') === values.wordToGuess){
+                        console.log('ENTRO EN OKKKK');
+                        setValues({...values, status: 'win'});
+                        console.log(values);
+                        console.log(`You win at round ${values.rowIndex+1}`);
+                    }else{
+
+                        setValues({...values, rowIndex: values.rowIndex + 1, letterIndex:0})
                     }
                 }else{
-                    console.log(values.letterIndex);
+                    //console.log(values.letterIndex);
                     console.log('You not have completed the word!');
                 }
             }
+        }else if(values.status === 'win'){
+            console.log('You have alredy won!');
         }
     }
         return(
