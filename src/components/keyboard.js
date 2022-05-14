@@ -20,32 +20,33 @@ function Keyboard(){
             //console.log(values.status);
             let copyKeys = [...values.keys];
             let currentWord = [...values.currentWord]
-
-            //console.log(copyKeys);
             if( letter !== 'ENTER' && letter !== 'DEL'){
                 //console.log(values.letterIndex);
                 if(values.letterIndex < 5){
-                    copyKeys[values.rowIndex][values.letterIndex] = letter;
+                    copyKeys[values.rowIndex][values.letterIndex][0] = letter;
                     //console.log(copyKeys);
                     setValues({...values, keys: copyKeys, letterIndex: values.letterIndex + 1})
                 }else{
+                    console.log(values);
                     console.log('You have already entered the five characters, click enter or delete one of them');
                 }
             }else if(letter === 'DEL'){
                 if(values.letterIndex > 0){
-                    copyKeys[values.rowIndex][values.letterIndex-1] = '';
+                    copyKeys[values.rowIndex][values.letterIndex-1][0] = '';
                     setValues({...values, keys: copyKeys, letterIndex: values.letterIndex - 1})
                 }
-
+                
             }else{
                 //ENTER
                 if(values.letterIndex === 5){
-                    const enteredWord = values.keys[values.rowIndex];
+                    //console.log(values.keys[values.rowIndex]);
+                    const enteredWord = values.keys[values.rowIndex].map(key=>key[0]);
                     async function changeFormat(){
                         for (let i = 0; i < enteredWord.length; i++) {
-                            //console.log('Ejecutosetimeout');
                             if(enteredWord[i]===values.wordToGuess[i]){
                                 let element = document.getElementById(`cell${values.rowIndex}${i}`);
+                                copyKeys[values.rowIndex][i][1]='g';
+                                setValues({...values, keys: copyKeys});
                                 element.classList.add("green");
                                 element.classList.add("anime");
                                 element = document.getElementById(`k${enteredWord[i]}`);
@@ -54,6 +55,8 @@ function Keyboard(){
                             }else{
                                 if(!values.wordToGuess.split("").some(letter => letter===enteredWord[i])){
                                     let element = document.getElementById(`cell${values.rowIndex}${i}`);
+                                    copyKeys[values.rowIndex][i][1]='w';
+                                    setValues({...values, keys: copyKeys});
                                     element.classList.add("wrong");
                                     element.classList.add("anime");
                                     element = document.getElementById(`k${enteredWord[i]}`);
@@ -68,13 +71,14 @@ function Keyboard(){
                     changeFormat();
                     //console.log(enteredWord.join(''), values.wordToGuess);
                     if( enteredWord.join('') === values.wordToGuess){
-                        console.log('ENTRO EN OKKKK');
+                        //console.log('ENTRO EN OKKKK');
                         setValues({...values, status: 'win'});
-                        console.log(values);
-                        console.log(`You win at round ${values.rowIndex+1}`);
+                        //console.log(values);
+                        console.log(`You win at round ${values.rowIndex + 1}`);
                     }else{
-
-                        setValues({...values, rowIndex: values.rowIndex + 1, letterIndex:0})
+                        console.log('aplicoValoresa values');
+                        setValues({...values, rowIndex: values.rowIndex + 1, letterIndex: 0});
+                        console.log('HA IDO BIEN');
                     }
                 }else{
                     //console.log(values.letterIndex);
