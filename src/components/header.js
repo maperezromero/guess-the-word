@@ -7,15 +7,17 @@ function Header(){
     const { values, setValues } = useContext(valuesContext);
 
     function handleChangeMode(){
+        document.body.removeAttribute('class');
+        let element = document.getElementById(`Header`);
+        element.removeAttribute('class');
+
         if(values.darkMode){
-            document.body.removeAttribute('class');
-            //document.body.classList.toggle("theme-1")
-            //document.body.classList.remove('dark');
             document.body.classList.toggle('light');
+            element.className = 'Header light';
+            
         }else{
-            document.body.removeAttribute('class');
-            //document.body.classList.remove('light');
             document.body.classList.toggle('dark');
+            element.className = 'Header dark';
         }
         
         setValues({...values, darkMode: !values.darkMode});

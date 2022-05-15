@@ -1,7 +1,7 @@
 
 .Header{
     height: 6vh;
-    font-size: 2rem;
+    font-size: min(4vw, 4vh);
     border-bottom: 1px solid;
     width: 100vw;
     margin-bottom: 15vh;
@@ -11,7 +11,7 @@
 }
 
 .image{
-    width: 1em;
+    width: 2em;
     position: absolute;
     right: 5vw;
     cursor: pointer;

@@ -46,5 +46,8 @@
 
 .key.wrong{
     --color-bg:#3a3a3c;
+}
 
+.key.yellow{
+    background-color: #c9b458;
 }

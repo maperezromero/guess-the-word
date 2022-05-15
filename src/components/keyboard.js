@@ -19,7 +19,7 @@ function Keyboard(){
         if (values.status!=='over' && values.status!=='win'){
             //console.log(values.status);
             let copyKeys = [...values.keys];
-            let currentWord = [...values.currentWord]
+            //let currentWord = [...values.currentWord]
             if( letter !== 'ENTER' && letter !== 'DEL'){
                 //console.log(values.letterIndex);
                 if(values.letterIndex < 5){
@@ -53,6 +53,7 @@ function Keyboard(){
                                 element.removeAttribute('class');
                                 element.className = 'key green';
                             }else{
+                                //No Match
                                 if(!values.wordToGuess.split("").some(letter => letter===enteredWord[i])){
                                     let element = document.getElementById(`cell${values.rowIndex}${i}`);
                                     copyKeys[values.rowIndex][i][1]='w';
@@ -62,26 +63,38 @@ function Keyboard(){
                                     element = document.getElementById(`k${enteredWord[i]}`);
                                     element.removeAttribute('class');
                                     element.className = 'key wrong';
+                                }else{
+                                    //some match
+                                    console.log(enteredWord[i]);
+                                    const numMatchesWordToGuess = values.wordToGuess.split("").filter(letter=> letter === enteredWord[i]).length;
+                                    const numMatchesEnteredWord = enteredWord.filter(letter=> letter === enteredWord[i]).length;
+                                    if(numMatchesWordToGuess>=numMatchesEnteredWord){
+                                        let element = document.getElementById(`cell${values.rowIndex}${i}`);
+                                        copyKeys[values.rowIndex][i][1]='y';
+                                        setValues({...values, keys: copyKeys});
+                                        element.classList.add("yellow");
+                                        element.classList.add("anime");
+                                        element = document.getElementById(`k${enteredWord[i]}`);
+                                        element.removeAttribute('class');
+                                        element.className = 'key yellow';
+                                    }
+                                    console.log(numMatchesWordToGuess, numMatchesEnteredWord);
                                 }
+
                             }
                             await delay(150);
+                          
+                        }
+                        if( enteredWord.join('') === values.wordToGuess){
+                            setValues({...values, status: 'win'});
+                            console.log(`You win at round ${values.rowIndex + 1}`);
+                        }else{
+                            setValues({...values, rowIndex: 1, letterIndex: 0});
                         }
 
                     }
                     changeFormat();
-                    //console.log(enteredWord.join(''), values.wordToGuess);
-                    if( enteredWord.join('') === values.wordToGuess){
-                        //console.log('ENTRO EN OKKKK');
-                        setValues({...values, status: 'win'});
-                        //console.log(values);
-                        console.log(`You win at round ${values.rowIndex + 1}`);
-                    }else{
-                        console.log('aplicoValoresa values');
-                        setValues({...values, rowIndex: values.rowIndex + 1, letterIndex: 0});
-                        console.log('HA IDO BIEN');
-                    }
                 }else{
-                    //console.log(values.letterIndex);
                     console.log('You not have completed the word!');
                 }
             }

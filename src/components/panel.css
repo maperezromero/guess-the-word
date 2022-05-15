@@ -22,6 +22,9 @@
   .cell.green{
     background-color: green;
   }
+  .cell.yellow{
+    background-color: #c9b458;
+  }
   .cell.wrong{
     background-color:#3a3a3c ; 
   }

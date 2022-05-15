@@ -1,6 +1,12 @@
 @import "./components/panel.css";
 @import "./components/header.css";
 @import "./components/keyboard.css";
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
+
+*{
+  font-family: 'Spartan', sans-serif;
+  font-size: min(1.5vw, 1.5vh);
+}
 
 .light{
   --main-background :#ffffff;
@@ -18,7 +24,8 @@
 
 body.light {
   --color-bg: #FFFFFF;
-  --color-text: #000000;
+  --color-text: #ffffff;
+  --color-header: #000000;
 }
 
 body.dark {
@@ -34,4 +41,8 @@ body {
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
+}
+
+.Header.light{
+  color: var(--color-header);
 }

@@ -10,8 +10,7 @@ function App() {
 
   const [values, setValues] = useState(
     {
-      wordToGuess: 'RODEA',
-      currentWord: [],
+      wordToGuess: 'RADIA',      
       darkMode: true,
       rowIndex: 0,
       letterIndex:0,
@@ -36,7 +35,7 @@ function App() {
   return (
     <valuesContext.Provider value ={{values, setValues}}>
       <div className="App">
-      <Header/>
+        <Header/>
         <PanelGame/>
         <Keyboard/>
       </div>
