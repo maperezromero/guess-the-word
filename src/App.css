@@ -1,6 +1,7 @@
 @import "./components/panel.css";
 @import "./components/header.css";
 @import "./components/keyboard.css";
+@import "./components/notification.css";
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
 
 *{
@@ -45,4 +46,8 @@ body {
 
 .Header.light{
   color: var(--color-header);
+}
+
+.App{
+  position: relative;
 }

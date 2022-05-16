@@ -2,6 +2,7 @@ import { useState, createContext, useEffect } from 'react';
 import './App.css';
 import Header from './components/header';
 import Keyboard from './components/keyboard';
+import Notification from './components/notification';
 import PanelGame from './components/panel';
 
 export const valuesContext = createContext(null);
@@ -22,7 +23,13 @@ function App() {
           [['',''],['',''],['',''],['',''],['','']],
           [['',''],['',''],['',''],['',''],['','']]
         ],
-      status: 'playing'
+      status: 'playing',
+      showNotification:false,
+      notification:{
+        position: '',
+        color: '',
+        text: '',
+      }
     }
   );
   
@@ -38,6 +45,7 @@ function App() {
         <Header/>
         <PanelGame/>
         <Keyboard/>
+        {values.showNotification && <Notification/>}
       </div>
       
     </valuesContext.Provider>

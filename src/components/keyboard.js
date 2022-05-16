@@ -86,8 +86,18 @@ function Keyboard(){
                           
                         }
                         if( enteredWord.join('') === values.wordToGuess){
-                            setValues({...values, status: 'win'});
+                            const notificationsParams={
+                                color: 'green',
+                                position: 'center',
+                                text: `You win at round ${values.rowIndex + 1}`
+                            }
+                            setValues({...values, status: 'win', notification: notificationsParams, showNotification: true});
+                            setTimeout(() => {
+                                setValues({...values, showNotification: false})
+                            }, 3000);
+                            
                             console.log(`You win at round ${values.rowIndex + 1}`);
+
                         }else{
                             setValues({...values, rowIndex: 1, letterIndex: 0});
                         }
