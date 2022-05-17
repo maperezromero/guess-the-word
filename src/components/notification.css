@@ -22,8 +22,7 @@
     -webkit-animation-fill-mode: forwards;
 }
 /* Safari and Chrome */
-@-webkit-keyframes moveOpen 
-	{
+@-webkit-keyframes moveOpen{
     from {-webkit-transform: translate(0,-100px);}
     10% {-webkit-transform: translate(0,20px);}
     12% {-webkit-transform: translate(0,22px);}

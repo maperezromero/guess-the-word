@@ -1,0 +1,23 @@
+.resume{
+    height: 50vh;
+    width: 50vh;
+    background-color: white;
+    color: red;
+    position: absolute;
+    font-size: 12px;
+    
+}
+
+.texto{
+    background-color: blueviolet;
+    position: relative;
+}
+
+.close{
+    width: 2em;
+    position: absolute;
+    right: 5vw;
+    top: 5vw;
+    cursor: pointer;
+}
+

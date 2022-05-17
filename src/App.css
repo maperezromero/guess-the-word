@@ -2,6 +2,7 @@
 @import "./components/header.css";
 @import "./components/keyboard.css";
 @import "./components/notification.css";
+@import "./components/resume.css";
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
 
 *{
@@ -21,6 +22,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 body.light {
@@ -48,6 +50,3 @@ body {
   color: var(--color-header);
 }
 
-.App{
-  position: relative;
-}

@@ -93,7 +93,7 @@ function Keyboard(){
                             }
                             setValues({...values, status: 'win', notification: notificationsParams, showNotification: true});
                             setTimeout(() => {
-                                setValues({...values, showNotification: false})
+                                setValues({...values, showNotification: false, showResume: true})
                             }, 3000);
                             
                             console.log(`You win at round ${values.rowIndex + 1}`);

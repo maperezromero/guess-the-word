@@ -4,6 +4,7 @@ import Header from './components/header';
 import Keyboard from './components/keyboard';
 import Notification from './components/notification';
 import PanelGame from './components/panel';
+import ResumePanel from './components/resume';
 
 export const valuesContext = createContext(null);
 
@@ -24,12 +25,13 @@ function App() {
           [['',''],['',''],['',''],['',''],['','']]
         ],
       status: 'playing',
-      showNotification:false,
+      showNotification: false,
       notification:{
-        position: '',
         color: '',
+        position: '',
         text: '',
-      }
+      },
+      showResume: false,
     }
   );
   
@@ -46,6 +48,7 @@ function App() {
         <PanelGame/>
         <Keyboard/>
         {values.showNotification && <Notification/>}
+        {values.showResume && <ResumePanel/>}
       </div>
       
     </valuesContext.Provider>
