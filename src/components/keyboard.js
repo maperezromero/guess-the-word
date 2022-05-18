@@ -1,4 +1,3 @@
-import { logDOM } from "@testing-library/react";
 import { useContext } from "react";
 import { valuesContext } from "../App";
 
@@ -14,10 +13,11 @@ function Keyboard(){
     function handleClick(e){
         
         const delay = async ( ms = 1000 ) => new Promise (res => setTimeout(res,ms));
+
         let letter= e.target.innerHTML;
         
         if (values.status!=='over' && values.status!=='win'){
-            //console.log(values.status);
+            //console.log(values);
             let copyKeys = [...values.keys];
             //let currentWord = [...values.currentWord]
             if( letter !== 'ENTER' && letter !== 'DEL'){
@@ -27,7 +27,7 @@ function Keyboard(){
                     //console.log(copyKeys);
                     setValues({...values, keys: copyKeys, letterIndex: values.letterIndex + 1})
                 }else{
-                    console.log(values);
+                    //console.log(values);
                     console.log('You have already entered the five characters, click enter or delete one of them');
                 }
             }else if(letter === 'DEL'){
@@ -65,7 +65,7 @@ function Keyboard(){
                                     element.className = 'key wrong';
                                 }else{
                                     //some match
-                                    console.log(enteredWord[i]);
+                                    //console.log(enteredWord[i]);
                                     const numMatchesWordToGuess = values.wordToGuess.split("").filter(letter=> letter === enteredWord[i]).length;
                                     const numMatchesEnteredWord = enteredWord.filter(letter=> letter === enteredWord[i]).length;
                                     if(numMatchesWordToGuess>=numMatchesEnteredWord){
@@ -78,7 +78,7 @@ function Keyboard(){
                                         element.removeAttribute('class');
                                         element.className = 'key yellow';
                                     }
-                                    console.log(numMatchesWordToGuess, numMatchesEnteredWord);
+                                    //console.log(numMatchesWordToGuess, numMatchesEnteredWord);
                                 }
 
                             }
@@ -89,17 +89,30 @@ function Keyboard(){
                             const notificationsParams={
                                 color: 'green',
                                 position: 'center',
-                                text: `You win at round ${values.rowIndex + 1}`
+                                text: `You win at round ${values.rowIndex + 1}!`
                             }
-                            setValues({...values, status: 'win', notification: notificationsParams, showNotification: true});
+                            setValues({...values, notification: notificationsParams, showNotification: true});
                             setTimeout(() => {
-                                setValues({...values, showNotification: false, showResume: true})
+                                setValues({...values, status: 'win', showNotification: false, showResume: true})
                             }, 3000);
                             
-                            console.log(`You win at round ${values.rowIndex + 1}`);
+                            //console.log(`You win at round ${values.rowIndex + 1}`);
 
                         }else{
-                            setValues({...values, rowIndex: 1, letterIndex: 0});
+                            if(values.rowIndex===5){
+                                const notificationsParams={
+                                    color: 'red',
+                                    position: 'center',
+                                    text: `You lost`
+                                }
+                                setValues({...values, notification: notificationsParams, showNotification: true});
+                            setTimeout(() => {
+                                setValues({...values, status: 'over', showNotification: false, showResume: true})
+                            }, 3000);
+                            }else{
+
+                                setValues({...values, rowIndex: values.rowIndex + 1, letterIndex: 0});
+                            }
                         }
 
                     }
@@ -109,7 +122,20 @@ function Keyboard(){
                 }
             }
         }else if(values.status === 'win'){
-            console.log('You have alredy won!');
+            //console.log('You have alredy won!');
+            const notificationsParams={
+                color: 'green',
+                position: 'center',
+                text: `You have already won at round ${values.rowIndex + 1}!`
+            }
+            setValues({...values, notification: notificationsParams, showNotification: true});
+        }else if(values.status === 'over'){
+            const notificationsParams={
+                color: 'red',
+                position: 'center',
+                text: `You lost`
+            }
+            setValues({...values, notification: notificationsParams, showNotification: true});
         }
     }
         return(

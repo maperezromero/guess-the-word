@@ -5,7 +5,9 @@
     color: red;
     position: absolute;
     font-size: 12px;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .texto{
@@ -21,3 +23,35 @@
     cursor: pointer;
 }
 
+.colors{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-background);
+    gap: 1px;
+    position: absolute;
+    top: 50px;
+}
+  
+.row-color{
+display: flex;
+align-content: space-between;
+gap: 1px;
+}
+
+.color{
+border: solid grey 2px;
+aspect-ratio: 1;
+height: 1.5vh;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.color.g{
+    background-color: green;
+}
+.color.y{
+background-color: #c9b458;
+}
+.color.w{
+background-color:#3a3a3c ; 
+}
