@@ -16,3 +16,10 @@
     right: 5vw;
     cursor: pointer;
 }
+
+.results{
+    width: 2em;
+    position: absolute;
+    right: 10vw;
+    cursor: pointer;
+}

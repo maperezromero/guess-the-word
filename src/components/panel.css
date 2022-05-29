@@ -31,9 +31,11 @@
   .cell.anime{
     /* display: inline-block; */
     animation: rotation 2s linear;
-
   }
-  
+
+  .cell.light{
+    color: black;
+  }
   @keyframes rotation {
     50% {
       transform: rotateX(-90deg);

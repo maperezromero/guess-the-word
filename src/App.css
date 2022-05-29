@@ -12,10 +12,12 @@
 
 .light{
   --main-background :#ffffff;
+  --cell-font-color: #000000
   
 }
 .dark{
   --main-background :#000000;
+  --cell-font-color: #ffffff
 }
 .App{
   display: flex;

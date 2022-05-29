@@ -39,7 +39,7 @@ gap: 1px;
 }
 
 .color{
-border: solid grey 2px;
+/* border: solid grey 2px; */
 aspect-ratio: 1;
 height: 1.5vh;
 display: flex;
@@ -55,3 +55,4 @@ background-color: #c9b458;
 .color.w{
 background-color:#3a3a3c ; 
 }
+

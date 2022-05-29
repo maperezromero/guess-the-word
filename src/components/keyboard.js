@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext } from "react";
 import { valuesContext } from "../App";
 
@@ -11,7 +12,7 @@ function Keyboard(){
     //console.log(keys.map(key=>key));
 
     function handleClick(e){
-        
+        //console.log( values.wordToGuess);
         const delay = async ( ms = 1000 ) => new Promise (res => setTimeout(res,ms));
 
         let letter= e.target.innerHTML;
@@ -23,6 +24,11 @@ function Keyboard(){
             if( letter !== 'ENTER' && letter !== 'DEL'){
                 //console.log(values.letterIndex);
                 if(values.letterIndex < 5){
+                    if(!values.darkMode){
+                        let element = document.getElementById(`cell${values.rowIndex}${values.letterIndex}`);
+                        element.removeAttribute('class');
+                        element.className = 'cell light';
+                    }
                     copyKeys[values.rowIndex][values.letterIndex][0] = letter;
                     //console.log(copyKeys);
                     setValues({...values, keys: copyKeys, letterIndex: values.letterIndex + 1})
@@ -47,8 +53,8 @@ function Keyboard(){
                                 let element = document.getElementById(`cell${values.rowIndex}${i}`);
                                 copyKeys[values.rowIndex][i][1]='g';
                                 setValues({...values, keys: copyKeys});
-                                element.classList.add("green");
-                                element.classList.add("anime");
+                                element.removeAttribute('class');
+                                element.className = 'cell green anime';
                                 element = document.getElementById(`k${enteredWord[i]}`);
                                 element.removeAttribute('class');
                                 element.className = 'key green';
@@ -58,8 +64,8 @@ function Keyboard(){
                                     let element = document.getElementById(`cell${values.rowIndex}${i}`);
                                     copyKeys[values.rowIndex][i][1]='w';
                                     setValues({...values, keys: copyKeys});
-                                    element.classList.add("wrong");
-                                    element.classList.add("anime");
+                                    element.removeAttribute('class');
+                                    element.className = 'cell wrong';
                                     element = document.getElementById(`k${enteredWord[i]}`);
                                     element.removeAttribute('class');
                                     element.className = 'key wrong';
@@ -72,13 +78,12 @@ function Keyboard(){
                                         let element = document.getElementById(`cell${values.rowIndex}${i}`);
                                         copyKeys[values.rowIndex][i][1]='y';
                                         setValues({...values, keys: copyKeys});
-                                        element.classList.add("yellow");
-                                        element.classList.add("anime");
+                                        element.removeAttribute('class');
+                                        element.className = 'cell yellow anime';
                                         element = document.getElementById(`k${enteredWord[i]}`);
                                         element.removeAttribute('class');
                                         element.className = 'key yellow';
                                     }
-                                    //console.log(numMatchesWordToGuess, numMatchesEnteredWord);
                                 }
 
                             }
@@ -96,9 +101,26 @@ function Keyboard(){
                                 setValues({...values, status: 'win', showNotification: false, showResume: true})
                             }, 3000);
                             
-                            //console.log(`You win at round ${values.rowIndex + 1}`);
 
                         }else{
+                            axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${enteredWord.join('')}`)
+                                .then(function (response){
+                                    //console.log(response);
+                                })
+                                .catch(function (error){
+                                    const notificationsParams={
+                                        color: 'red',
+                                        position: 'center',
+                                        text: `The word doesn't exist!`
+                                    }
+                                    setValues({...values, notification: notificationsParams, showNotification: true});
+                                    setTimeout(() => {
+                                        setValues({...values, showNotification: false})
+                                    }, 1000);
+                                })
+                                .then(function (){
+                                    //console.log('HA ido bien');
+                                })
                             if(values.rowIndex===5){
                                 const notificationsParams={
                                     color: 'red',

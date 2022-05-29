@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, createContext, useEffect } from 'react';
 import './App.css';
 import Header from './components/header';
@@ -12,7 +13,7 @@ function App() {
 
   const [values, setValues] = useState(
     {
-      wordToGuess: 'RADIA',      
+      wordToGuess: '',      
       darkMode: true,
       rowIndex: 0,
       letterIndex:0,
@@ -35,7 +36,27 @@ function App() {
     }
   );
   
-  //document.body.classList.add('dark');
+  if(values.wordToGuess ===''){
+    //console.log('PRUEBAS');
+    setValues({...values, wordToGuess: 'loading'})
+
+    const options = {
+      method: 'GET',
+      url: 'https://random-words5.p.rapidapi.com/getRandom',
+      params: {wordLength: '5'},
+      headers: {
+        'X-RapidAPI-Host': 'random-words5.p.rapidapi.com',
+        'X-RapidAPI-Key': '7627f88adfmshf8321309b67139cp15cb16jsn03f28a8c5942'
+      }
+    };
+    
+    axios.request(options).then(function (response) {
+      //console.log(response.data);
+      setValues({...values, wordToGuess: response.data.toUpperCase()})
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }
   
   useEffect(() => {
   

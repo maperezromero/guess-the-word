@@ -1,5 +1,6 @@
 import moon from "../images/moon-night.png"
 import sun from "../images/black-sun.png"
+import results from "../images/results.png"
 import { valuesContext } from "../App";
 import { useContext } from "react";
 
@@ -23,11 +24,18 @@ function Header(){
         setValues({...values, darkMode: !values.darkMode});
     }
 
+    const handleClickResults = ()=> {
+        console.log('prueba');
+        setValues({...values, showResume: !values.showResume});
+    }
+
     return(
         <div className="Header" id="Header">
             Guess The Word
-                {values.darkMode && <img src={sun} alt="sun" className="image" onClick={handleChangeMode}></img>}
-                {!values.darkMode && <img src={moon} alt="sun" className="image" onClick={handleChangeMode}></img>}
+            
+            <img src={results} alt="results" className="image results" onClick={handleClickResults}></img>
+            {values.darkMode && <img src={sun} alt="sun" className="image" onClick={handleChangeMode}></img>}
+            {!values.darkMode && <img src={moon} alt="sun" className="image" onClick={handleChangeMode}></img>}
             
         </div>
     )

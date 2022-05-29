@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { valuesContext } from "../App";
-import close from "../images/close.png"
+import close from "../images/close-grey.png"
 
 function ResumePanel(){
     const { values, setValues } = useContext(valuesContext);

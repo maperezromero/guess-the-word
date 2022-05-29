@@ -1,10 +1,10 @@
 .notification{
     display:block;
-    font-size:2em;
+    font-size:4vmin;
     width:180px;
     padding:5px 0;
     position:absolute;
-    top:0;
+    top:10vh;
     left:50%;
     margin-left:-90px;
     box-sizing:border-box;
