@@ -1,3 +1,17 @@
+root{
+  --font-color-played: #ffffff;
+}
+
+
+.light{
+  --font-color: #000000;
+}
+.dark{
+  --font-color: #ffffff
+}
+
+
+
 .panel{
     display: flex;
     flex-direction: column;
@@ -17,6 +31,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--font-color);
   }
 
   .cell.green{
@@ -32,10 +47,10 @@
     /* display: inline-block; */
     animation: rotation 2s linear;
   }
-
-  .cell.light{
-    color: black;
-  }
+.cell.played{
+  color: var(--font-color-played);
+}
+  
   @keyframes rotation {
     50% {
       transform: rotateX(-90deg);

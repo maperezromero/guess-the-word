@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext } from "react";
 import { valuesContext } from "../App";
-
+import setData from "../helpers/setData"
 function Keyboard(){
     const { values, setValues } = useContext(valuesContext);
     const keys = [
@@ -24,17 +24,11 @@ function Keyboard(){
             if( letter !== 'ENTER' && letter !== 'DEL'){
                 //console.log(values.letterIndex);
                 if(values.letterIndex < 5){
-                    if(!values.darkMode){
-                        let element = document.getElementById(`cell${values.rowIndex}${values.letterIndex}`);
-                        element.removeAttribute('class');
-                        element.className = 'cell light';
-                    }
+                  
                     copyKeys[values.rowIndex][values.letterIndex][0] = letter;
-                    //console.log(copyKeys);
                     setValues({...values, keys: copyKeys, letterIndex: values.letterIndex + 1})
                 }else{
-                    //console.log(values);
-                    console.log('You have already entered the five characters, click enter or delete one of them');
+                    //console.log('You have already entered the five characters, click enter or delete one of them');
                 }
             }else if(letter === 'DEL'){
                 if(values.letterIndex > 0){
@@ -45,7 +39,6 @@ function Keyboard(){
             }else{
                 //ENTER
                 if(values.letterIndex === 5){
-                    //console.log(values.keys[values.rowIndex]);
                     const enteredWord = values.keys[values.rowIndex].map(key=>key[0]);
                     async function changeFormat(){
                         for (let i = 0; i < enteredWord.length; i++) {
@@ -54,7 +47,7 @@ function Keyboard(){
                                 copyKeys[values.rowIndex][i][1]='g';
                                 setValues({...values, keys: copyKeys});
                                 element.removeAttribute('class');
-                                element.className = 'cell green anime';
+                                element.className = 'cell green anime played';
                                 element = document.getElementById(`k${enteredWord[i]}`);
                                 element.removeAttribute('class');
                                 element.className = 'key green';
@@ -65,7 +58,7 @@ function Keyboard(){
                                     copyKeys[values.rowIndex][i][1]='w';
                                     setValues({...values, keys: copyKeys});
                                     element.removeAttribute('class');
-                                    element.className = 'cell wrong';
+                                    element.className = 'cell wrong played';
                                     element = document.getElementById(`k${enteredWord[i]}`);
                                     element.removeAttribute('class');
                                     element.className = 'key wrong';
@@ -79,7 +72,7 @@ function Keyboard(){
                                         copyKeys[values.rowIndex][i][1]='y';
                                         setValues({...values, keys: copyKeys});
                                         element.removeAttribute('class');
-                                        element.className = 'cell yellow anime';
+                                        element.className = 'cell yellow anime played';
                                         element = document.getElementById(`k${enteredWord[i]}`);
                                         element.removeAttribute('class');
                                         element.className = 'key yellow';
@@ -97,8 +90,9 @@ function Keyboard(){
                                 text: `You win at round ${values.rowIndex + 1}!`
                             }
                             setValues({...values, notification: notificationsParams, showNotification: true});
+                            setData(1, values.rowIndex+1);
                             setTimeout(() => {
-                                setValues({...values, status: 'win', showNotification: false, showResume: true})
+                                setValues({...values, status: 'win', showNotification: false, showResume: true, resume:{...values.resume, isRead: false}})
                             }, 3000);
                             
 
@@ -127,7 +121,9 @@ function Keyboard(){
                                     position: 'center',
                                     text: `You lost`
                                 }
-                                setValues({...values, notification: notificationsParams, showNotification: true});
+                                setData(0, 0);
+                                
+                                setValues({...values, notification: notificationsParams, showNotification: true, resume:{...values.resume, isRead: false}});
                             setTimeout(() => {
                                 setValues({...values, status: 'over', showNotification: false, showResume: true})
                             }, 3000);
@@ -140,7 +136,7 @@ function Keyboard(){
                     }
                     changeFormat();
                 }else{
-                    console.log('You not have completed the word!');
+                    //console.log('You not have completed the word!');
                 }
             }
         }else if(values.status === 'win'){
@@ -150,6 +146,7 @@ function Keyboard(){
                 position: 'center',
                 text: `You have already won at round ${values.rowIndex + 1}!`
             }
+            
             setValues({...values, notification: notificationsParams, showNotification: true});
         }else if(values.status === 'over'){
             const notificationsParams={
@@ -158,6 +155,7 @@ function Keyboard(){
                 text: `You lost`
             }
             setValues({...values, notification: notificationsParams, showNotification: true});
+            
         }
     }
         return(

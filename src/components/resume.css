@@ -1,7 +1,26 @@
+:root{
+    
+    --font-color: #ffffff;
+    --resume-background: #000000;
+    
+}
+
+
+.light{
+    
+    --font-color: #000000;
+    --resume-background: #ffffff;
+}
+.dark{
+    --font-color: #ffffff;
+    --resume-background: #000000;
+  }
+  
+
 .resume{
-    height: 50vh;
-    width: 50vh;
-    background-color: white;
+    height: 95vh;
+    width: 60vh;
+    background-color: var(--resume-background);
     color: red;
     position: absolute;
     font-size: 12px;
@@ -26,10 +45,10 @@
 .colors{
     display: flex;
     flex-direction: column;
-    background-color: var(--main-background);
+    background-color: var(--resume-background);
     gap: 1px;
     position: absolute;
-    top: 50px;
+    top: 5vh;
 }
   
 .row-color{
@@ -55,4 +74,33 @@ background-color: #c9b458;
 .color.w{
 background-color:#3a3a3c ; 
 }
+.statistics{
+    display: flex;
+    position: absolute;
+    gap: 10px;
+    top: 18vh;
+}
+.values > *, .details >*{
+
+    color: var(--font-color);
+}
+.values > *{
+    text-align: center;
+    align-self: center;
+}
+.details h2,h3{
+    align-self: center;
+    text-align: start;
+}
+h2{
+    font-size: 3vmin;
+}
+
+.details{
+    position: absolute;
+    top: 30vh;
+    left: 8vw;
+    justify-self: start;
+}
+
 

@@ -25,7 +25,7 @@ function Header(){
     }
 
     const handleClickResults = ()=> {
-        console.log('prueba');
+        //console.log('prueba');
         setValues({...values, showResume: !values.showResume});
     }
 

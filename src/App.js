@@ -25,7 +25,7 @@ function App() {
           [['',''],['',''],['',''],['',''],['','']],
           [['',''],['',''],['',''],['',''],['','']]
         ],
-      status: 'playing',
+      status: 'start',
       showNotification: false,
       notification:{
         color: '',
@@ -33,6 +33,13 @@ function App() {
         text: '',
       },
       showResume: false,
+      resume : {
+        played: 0,
+        won: 0,
+        spell: 0,
+        bestSpell: 0,
+        isRead: false,
+    }
     }
   );
   
@@ -56,8 +63,16 @@ function App() {
     }).catch(function (error) {
       console.error(error);
     });
-  }
   
+    
+  }
+  /* if(!values.resume.isRead){
+    let data = JSON.parse(window.localStorage.getItem('guess-the-word'));
+    //console.log(data);
+    data={...data, isRead: true}
+    setValues({...values, resume: data})
+  } */
+
   useEffect(() => {
   
   });
